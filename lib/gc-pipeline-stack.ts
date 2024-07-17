@@ -5,8 +5,8 @@ import {
   CodePipelineSource,
   ShellStep,
 } from "aws-cdk-lib/pipelines";
-import { lambdaStack } from './lambda-stack';
-import {LexbotStack} from './lex-stack'
+import { cdkStage } from "./stage-stack";
+
 
 export class GcPipelineStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -19,13 +19,11 @@ export class GcPipelineStack extends cdk.Stack {
       }),
       pipelineName: "GameChanger-Pipeline",
     });
+  const devStage = cdkgit.addStage(
+      new cdkStage(this, "dev", {
+        env: { account: "862165548342", region: "us-east-1" },
+      })
+    );
     
-    new lambdaStack(this, 'lambdaStack', {
-      
-      env: { account: "862165548342", region: "us-east-1" },
-      });
-    new LexbotStack(this, 'lexStack', {
-      env: { account: "862165548342", region: "us-east-1" },
-      });
   }
 }

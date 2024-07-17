@@ -4,7 +4,7 @@ import * as lex from 'aws-cdk-lib/aws-lex';
 import { Construct } from 'constructs';
 
 export class LexbotStack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
+  constructor(scope: Construct, id: string, stageName: string, props?: StackProps) {
     super(scope, id, props);
     
 
